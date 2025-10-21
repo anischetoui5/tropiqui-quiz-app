@@ -1,22 +1,23 @@
 {
-  "name": "nodejs",
+  "name": "tropiqui-quiz-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "node.js",
+  "description": "TropiQui Quiz Platform",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["quiz", "education", "nodejs"],
+  "author": "Your Name",
   "license": "ISC",
   "dependencies": {
     "@capacitor/android": "^7.4.3",
     "@capacitor/core": "^7.4.3",
-    "bcrypt": "^6.0.0",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
-    "express": "^5.1.0",
+    "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "multer": "^2.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.14.5",
     "socket.io": "^4.8.1"
   },
