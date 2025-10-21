@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizHub - Interactive Learning Platform</title>
+    <link rel="stylesheet" href="public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing CSS remains the same */
+        
+        /* Add smooth scrolling to the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Add a highlight animation for the target section */
+        .highlight-section {
+            animation: highlight 2s ease;
+        }
+        
+        @keyframes highlight {
+            0% { background-color: transparent; }
+            50% { background-color: rgba(255, 0, 148, 0.1); }
+            100% { background-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="My Logo" width="150px" height="75px">
+                </a>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="#public-quizzes-section" class="nav-link">Quizzes</a>
+                    <a href="#" class="nav-link">Leaderboards</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </div>
+                <div class="notification-container">
+                    <div class="notification-bell" id="notificationBell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count" id="notificationCount">0</span>
+                    </div>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <span class="mark-all-read" id="markAllRead" onclick="notificationSystem.markAllAsRead()">
+                                Mark all as read
+                            </span>
+                </div>
+        <div class="notification-list" id="notificationList">
+            <!-- Notifications will appear here -->
+        </div>
+    </div>
+</div>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Log In</button>
+                    <button class="btn btn-primary" id="signupBtn"><i class="fas fa-user-plus"></i> Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <section class="hero animated">
+            <h1 class="hero-title">Challenge Your Mind with Fun Quizzes</h1>
+            <p class="hero-subtitle">Test your knowledge across various topics, compete with friends, and climb the leaderboards on our interactive quiz platform.</p>
+            <button class="btn btn-primary float-animation" id="startQuizBtn"><i class="fas fa-bolt"></i> Start Random Quiz</button>
+        </section>
+    </div>
+
+    <!-- Quiz Categories -->
+    <div class="container">
+        <h2 class="section-title">Quiz Categories</h2>
+        <div class="quiz-grid">
+            <div class="quiz-card animated" style="animation-delay: 0.1s;">
+                <div class="quiz-icon"><i class="fas fa-flask"></i></div>
+                <h3 class="quiz-title">Science & Technology</h3>
+                <p class="quiz-desc">Explore the wonders of science and the latest in technology advancements.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 24 quizzes</span>
+                    <span><i class="fas fa-users"></i> 12.5k plays</span>
+                </div>
+            </div>
+            
+            <div class="quiz-card animated" style="animation-delay: 0.2s;">
+                <div class="quiz-icon"><i class="fas fa-landmark"></i></div>
+                <h3 class="quiz-title">History & Culture</h3>
+                <p class="quiz-desc">Journey through time and explore diverse cultures around the world.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 18 quizzes</span>
+                    <span><i class="fas fa-users"></i> 8.7k plays</span>
+                </div>
+            </div>
+            
+            <div class="quiz-card animated" style="animation-delay: 0.3s;">
+                <div class="quiz-icon"><i class="fas fa-film"></i></div>
+                <h3 class="quiz-title">Movies & TV Shows</h3>
+                <p class="quiz-desc">Test your knowledge of popular films, series, and entertainment trivia.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 32 quizzes</span>
+                    <span><i class="fas fa-users"></i> 15.2k plays</span>
+                </div>
+            </div>
+            
+            <div class="quiz-card animated" style="animation-delay: 0.4s;">
+                <div class="quiz-icon"><i class="fas fa-music"></i></div>
+                <h3 class="quiz-title">Music & Arts</h3>
+                <p class="quiz-desc">From classical compositions to modern hits, challenge your artistic knowledge.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 15 quizzes</span>
+                    <span><i class="fas fa-users"></i> 7.3k plays</span>
+                </div>
+            </div>
+            
+            <div class="quiz-card animated" style="animation-delay: 0.5s;">
+                <div class="quiz-icon"><i class="fas fa-globe"></i></div>
+                <h3 class="quiz-title">Geography</h3>
+                <p class="quiz-desc">Explore countries, capitals, landmarks, and natural wonders of our world.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 21 quizzes</span>
+                    <span><i class="fas fa-users"></i> 9.8k plays</span>
+                </div>
+            </div>
+            
+            <div class="quiz-card animated" style="animation-delay: 0.6s;">
+                <div class="quiz-icon"><i class="fas fa-gamepad"></i></div>
+                <h3 class="quiz-title">Video Games</h3>
+                <p class="quiz-desc">Test your knowledge of popular games, characters, and gaming history.</p>
+                <div class="quiz-meta">
+                    <span><i class="fas fa-question-circle"></i> 27 quizzes</span>
+                    <span><i class="fas fa-users"></i> 14.1k plays</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Quizzes Section -->
+<div class="container" id="public-quizzes-section">
+    <h2 class="section-title">Public Quizzes from Our Community</h2>
+    <div class="quiz-grid" id="publicQuizzesGrid">
+        <!-- Public quizzes will be loaded here dynamically -->
+        <div class="loading-quizzes">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading public quizzes...</p>
+        </div>
+    </div>
+</div>
+
+    <!-- About & Social Section -->
+    <section class="about-section">
+        <div class="container about-container">
+            <h2 class="about-title">About Me & TropiQui</h2>
+            <p class="about-text">QuizHub was created by a team of quiz enthusiasts and developers who believe that learning should be fun and engaging. Our platform offers a wide range of quizzes on various topics to challenge your knowledge and help you learn new things.</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <button class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: white; border-color: white;">
+                <i class="fas fa-envelope"></i> Contact Me
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="justify-content: center;">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="My Logo" width="150px" height="75px">
+                </a>
+            </div>
+            <p class="footer-text"> Bring Your drink and enjoy :3 <i class="fas fa-heart" style="color: #ff4d4d;"></i></p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Sign Up</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="signup">Sign Up</div>
+                    <div class="auth-tab" data-tab="login">Log In</div>
+                </div>
+                
+                <div class="social-auth">
+                    <div 
+                        id="g_id_onload" 
+                        data-client_id="81279301899-hskpkcn3ffm9l2hri85v2d7tm7um2g25.apps.googleusercontent.com" 
+                        data-callback="handleCredentialResponse">
+                    </div>
+                    <div id="googleBtn"></div>
+
+                    <button class="social-btn discord-btn">
+                        <i class="fab fa-discord"></i> Continue with Discord
+                    </button>
+                </div>
+                
+                <div class="divider">
+                    <span>Or continue with email</span>
+                </div>
+                
+<form class="auth-form active" id="signupForm" method="POST" action="/signup">
+    <div class="form-group">
+        <label class="form-label" for="signupName">Full Name</label>
+        <input type="text" class="form-input" id="signupName" name="name" placeholder="Enter your name" required>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="signupEmail">Email Address</label>
+        <input type="email" class="form-input" id="signupEmail" name="email" placeholder="Enter your email" required>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="signupPassword">Password</label>
+        <input type="password" class="form-input" id="signupPassword" name="password" placeholder="Create a password" required>
+    </div>
+    <button type="submit" class="form-submit">Create Account</button>
+    <div class="form-footer">
+        By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+    </div>
+</form>
+
+                
+<form class="auth-form" id="loginForm" method="POST" action="/login">
+    <div class="form-group">
+        <label class="form-label" for="loginEmail">Email Address</label>
+        <input type="email" class="form-input" id="loginEmail" name="email" placeholder="Enter your email" required>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="loginPassword">Password</label>
+        <input type="password" class="form-input" id="loginPassword" name="password" placeholder="Enter your password" required>
+    </div>
+    <div class="form-group" style="text-align: right; margin-bottom: 20px;">
+        <a href="#" style="color: var(--primary); text-decoration: none; font-size: 0.875rem;">Forgot password?</a>
+    </div>
+    <button type="submit" class="form-submit">Log In</button>
+    <div class="form-footer">
+        Don't have an account? <a href="#" id="switchToSignup">Sign up</a>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Code Modal -->
+    <div class="modal-overlay" id="quizCodeModal">
+        <div class="quiz-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Enter Quiz Code</h2>
+                <button class="close-modal" id="closeQuizModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Please enter the code provided by your instructor to start the quiz.</p>
+                
+                <form class="quiz-code-form" id="quizCodeForm">
+                    <div class="form-group">
+                        <label class="form-label" for="quizCode">Quiz Code</label>
+                        <input type="text" class="form-input" id="quizCode" placeholder="Enter quiz code" required>
+                    </div>
+                    <button type="submit" class="form-submit">Start Quiz</button>
+                </form>
+                
+                <div class="form-footer">
+                    Don't have a code? <a href="#">Browse public quizzes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+<!-- Welcome Modal -->
+<div class="modal-overlay" id="welcomeModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Welcome Back! 👋</h2>
+            <button class="close-modal" id="closeWelcomeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center; padding: 20px;">
+                <i class="fas fa-party-horn" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <p id="welcomeMessage" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+                <button class="form-submit" id="welcomeOkBtn" style="margin: 0 auto;">
+                    Let's Get Started!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="script.js"></script>
+</div>
+</body>
+<script>
+        // Add this JavaScript to handle the scroll and highlight
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the quizzes link
+            const quizzesLink = document.querySelector('a[href="#public-quizzes-section"]');
+            
+            // Add click event listener
+            quizzesLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the target section
+                const targetSection = document.getElementById('public-quizzes-section');
+                
+                // Scroll to the section
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Add highlight animation
+                targetSection.classList.add('highlight-section');
+                
+                // Remove highlight after animation completes
+                setTimeout(() => {
+                    targetSection.classList.remove('highlight-section');
+                }, 2000);
+            });
+            
+            // Also handle direct URL navigation (if someone visits page#public-quizzes-section)
+            if (window.location.hash === '#public-quizzes-section') {
+                const targetSection = document.getElementById('public-quizzes-section');
+                targetSection.classList.add('highlight-section');
+                setTimeout(() => {
+                    targetSection.classList.remove('highlight-section');
+                }, 2000);
+            }
+        });
+    </script>
+</html>
