@@ -73,6 +73,9 @@ function connectToDatabase() {
 // Start the database connection
 connectToDatabase();
 
+console.log('Environment MYSQL_URL:', process.env.MYSQL_URL ? 'EXISTS' : 'MISSING');
+console.log('Using connection:', process.env.MYSQL_URL || 'local fallback');
+
 // Add database check middleware
 app.use((req, res, next) => {
     if (!isDatabaseConnected && !req.path.startsWith('/test-connection')) {
