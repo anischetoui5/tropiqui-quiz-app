@@ -37,20 +37,48 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static(__dirname));
 
-// Database connection
-const db = mysql.createConnection(process.env.MYSQL_URL || {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'quiz_app'
-});
+// Database connection with retry logic - REPLACE LINES 36-45
+let db;
+let isDatabaseConnected = false;
 
-db.connect((err) => {
-    if (err) {
-        console.error('❌ Database connection failed:', err);
-        process.exit(1);
+function connectToDatabase() {
+    db = mysql.createConnection(process.env.MYSQL_URL || {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'quiz_app'
+    });
+
+    db.connect((err) => {
+        if (err) {
+            console.error('❌ Database connection failed, retrying in 5 seconds:', err.message);
+            // Don't crash - just retry later
+            setTimeout(connectToDatabase, 5000);
+            isDatabaseConnected = false;
+        } else {
+            console.log('✅ Connected to MySQL database!');
+            isDatabaseConnected = true;
+        }
+    });
+
+    db.on('error', (err) => {
+        console.error('Database error, reconnecting...:', err);
+        isDatabaseConnected = false;
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            connectToDatabase();
+        }
+    });
+}
+
+// Start the database connection
+connectToDatabase();
+
+// Add database check middleware
+app.use((req, res, next) => {
+    if (!isDatabaseConnected && !req.path.startsWith('/test-connection')) {
+        return res.status(503).json({ error: 'Database temporarily unavailable, retrying...' });
     }
-    console.log('✅ Connected to MySQL database!');
+    next();
 });
 
 // Socket.IO connection handling
